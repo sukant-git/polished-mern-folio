@@ -2,6 +2,11 @@
 import { ArrowDown, Download } from 'lucide-react';
 
 const HeroSection = () => {
+  const handleDownloadResume = () => {
+    // Open resume in new tab for viewing and downloading
+    window.open('/resume.pdf', '_blank');
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-gray-900 via-black to-gray-900">
       {/* Background Animation */}
@@ -22,11 +27,11 @@ const HeroSection = () => {
 
         {/* Name and Title */}
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-300 bg-clip-text text-transparent animate-fade-in">
-          Your Name
+          MERN Stack Developer
         </h1>
         
         <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 animate-fade-in delay-200">
-          MERN Stack Developer
+          Full Stack Web Developer
         </h2>
 
         {/* Description */}
@@ -37,7 +42,10 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in delay-600">
-          <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center gap-2 group">
+          <button 
+            onClick={handleDownloadResume}
+            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center gap-2 group"
+          >
             <Download className="w-5 h-5 group-hover:animate-bounce" />
             Download Resume
           </button>

@@ -1,5 +1,5 @@
 
-import { CheckCircle } from 'lucide-react';
+import { Code, Database, Globe, Wrench } from 'lucide-react';
 
 const SkillsSection = () => {
   const skillCategories = [
@@ -41,16 +41,43 @@ const SkillsSection = () => {
     }
   ];
 
-  const certifications = [
-    "MongoDB Certified Developer",
-    "AWS Cloud Practitioner",
-    "React Developer Certification",
-    "Node.js Application Developer"
+  const floatingSkills = [
+    { name: 'React', icon: '⚛️' },
+    { name: 'Node.js', icon: '🟢' },
+    { name: 'MongoDB', icon: '🍃' },
+    { name: 'Express', icon: '🚀' },
+    { name: 'JavaScript', icon: '💛' },
+    { name: 'TypeScript', icon: '🔷' },
+    { name: 'Tailwind', icon: '🎨' },
+    { name: 'Git', icon: '📦' },
+    { name: 'AWS', icon: '☁️' },
+    { name: 'Docker', icon: '🐳' }
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gray-900">
-      <div className="max-w-6xl mx-auto px-8">
+    <section id="skills" className="py-20 bg-gray-900 relative overflow-hidden">
+      {/* Floating Skills Animation */}
+      <div className="absolute inset-0 pointer-events-none">
+        {floatingSkills.map((skill, index) => (
+          <div
+            key={index}
+            className="absolute text-2xl animate-bounce opacity-20 hover:opacity-40 transition-opacity duration-300"
+            style={{
+              left: `${Math.random() * 90}%`,
+              top: `${Math.random() * 90}%`,
+              animationDelay: `${index * 0.5}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
+          >
+            <div className="flex flex-col items-center">
+              <span className="text-3xl mb-1">{skill.icon}</span>
+              <span className="text-xs text-gray-500 font-medium">{skill.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             Skills & Expertise
@@ -92,32 +119,15 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        {/* Certifications */}
-        <div className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-2xl border border-gray-700">
-          <h3 className="text-2xl font-bold text-white mb-6 text-center">
-            Certifications & Achievements
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            {certifications.map((cert, index) => (
-              <div 
-                key={index}
-                className="flex items-center space-x-3 p-3 bg-gray-700/50 rounded-lg border border-gray-600"
-              >
-                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                <span className="text-gray-300">{cert}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Tech Stack Icons */}
         <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold text-white mb-8">Tech Stack</h3>
+          <h3 className="text-2xl font-bold text-white mb-8">Core Technologies</h3>
           <div className="flex flex-wrap justify-center gap-6">
             {['React', 'Node.js', 'MongoDB', 'Express', 'JavaScript', 'TypeScript', 'Tailwind'].map((tech, index) => (
               <div 
                 key={index}
-                className="px-4 py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-lg text-blue-300 font-medium hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-300 cursor-default"
+                className="px-4 py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-lg text-blue-300 font-medium hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-300 cursor-default animate-pulse"
+                style={{ animationDelay: `${index * 0.2}s` }}
               >
                 {tech}
               </div>

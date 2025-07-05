@@ -1,11 +1,15 @@
 
 import { ExternalLink, Github } from 'lucide-react';
+import { useState } from 'react';
 
 const ProjectsSection = () => {
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+
   const projects = [
     {
       title: "E-Commerce Platform",
-      description: "Full-stack MERN application with payment integration, user authentication, and admin dashboard.",
+      shortDescription: "Full-stack MERN application with payment integration",
+      fullDescription: "A comprehensive e-commerce platform built with MERN stack featuring user authentication, product management, shopping cart functionality, secure payment processing with Stripe integration, order tracking, and an intuitive admin dashboard for inventory management.",
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
       technologies: ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
       githubUrl: "https://github.com/yourusername/project1",
@@ -14,7 +18,8 @@ const ProjectsSection = () => {
     },
     {
       title: "Task Management App",
-      description: "Collaborative task management tool with real-time updates using Socket.io and Redux for state management.",
+      shortDescription: "Collaborative task management with real-time updates",
+      fullDescription: "A powerful collaborative task management application featuring real-time updates using Socket.io, drag-and-drop task organization, team collaboration tools, project timelines, notification system, and advanced filtering options with Redux for state management.",
       image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
       technologies: ["React", "Express.js", "Socket.io", "Redux", "PostgreSQL"],
       githubUrl: "https://github.com/yourusername/project2",
@@ -23,7 +28,8 @@ const ProjectsSection = () => {
     },
     {
       title: "Social Media Dashboard",
-      description: "Analytics dashboard for social media management with data visualization and scheduling features.",
+      shortDescription: "Analytics dashboard for social media management",
+      fullDescription: "Comprehensive social media analytics dashboard with data visualization, post scheduling capabilities, engagement metrics tracking, multi-platform integration, automated reporting, and detailed performance insights using Chart.js for interactive graphs.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
       technologies: ["React", "Node.js", "Chart.js", "MongoDB", "Express"],
       githubUrl: "https://github.com/yourusername/project3",
@@ -32,7 +38,8 @@ const ProjectsSection = () => {
     },
     {
       title: "Weather App",
-      description: "Responsive weather application with location-based forecasts and interactive maps.",
+      shortDescription: "Responsive weather app with location-based forecasts",
+      fullDescription: "Modern weather application with location-based forecasts, interactive maps, detailed weather analytics, 7-day forecasts, weather alerts, favorite locations management, and beautiful responsive design optimized for all devices.",
       image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop",
       technologies: ["React", "OpenWeather API", "Mapbox", "CSS3"],
       githubUrl: "https://github.com/yourusername/project4",
@@ -61,6 +68,8 @@ const ProjectsSection = () => {
               className={`group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-500 hover:scale-[1.02] ${
                 project.featured ? 'lg:col-span-1' : ''
               }`}
+              onMouseEnter={() => setHoveredProject(index)}
+              onMouseLeave={() => setHoveredProject(null)}
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
@@ -97,8 +106,10 @@ const ProjectsSection = () => {
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 mb-4 leading-relaxed">
-                  {project.description}
+                
+                {/* Dynamic Description */}
+                <p className="text-gray-400 mb-4 leading-relaxed transition-all duration-300">
+                  {hoveredProject === index ? project.fullDescription : project.shortDescription}
                 </p>
                 
                 {/* Technologies */}

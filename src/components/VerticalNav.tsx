@@ -8,7 +8,7 @@ const VerticalNav = () => {
     { icon: Twitter, href: "https://twitter.com/yourprofile", label: "Twitter" },
     { icon: Facebook, href: "https://facebook.com/yourprofile", label: "Facebook" },
     { icon: Youtube, href: "https://youtube.com/yourchannel", label: "YouTube" },
-    { icon: Mail, href: "mailto:your.email@example.com", label: "Email" },
+    { icon: Mail, href: "https://mail.google.com/mail/?view=cm&fs=1&to=your.email@gmail.com", label: "Gmail" },
   ];
 
   const navItems = [
@@ -17,6 +17,11 @@ const VerticalNav = () => {
     { icon: Briefcase, href: "#projects", label: "Projects" },
     { icon: MessageSquare, href: "#contact", label: "Contact" },
   ];
+
+  const handleMailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=your.email@gmail.com', '_blank');
+  };
 
   return (
     <nav className="fixed left-0 top-0 h-full w-16 bg-gray-900/95 backdrop-blur-sm border-r border-gray-800 z-50 flex flex-col items-center py-6">
@@ -48,6 +53,7 @@ const VerticalNav = () => {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={social.label === 'Gmail' ? handleMailClick : undefined}
             className="p-2 rounded-lg bg-gray-800/30 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 group relative"
             title={social.label}
           >

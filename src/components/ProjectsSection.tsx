@@ -67,7 +67,7 @@ const ProjectsSection = () => {
               {/* Flip Card Container */}
               <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
                 
-                {/* Front Side - Image and Title */}
+                {/* Front Side - Image, Title, and Tech Stack */}
                 <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden border border-gray-800">
                   <div className="relative h-full">
                     <img 
@@ -75,14 +75,25 @@ const ProjectsSection = () => {
                       alt={project.title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-2xl font-bold text-white mb-2">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    
+                    {/* Project Info Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <h3 className="text-2xl font-bold text-white mb-3">
                         {project.title}
                       </h3>
-                      <p className="text-gray-300 text-sm">
-                        {project.shortDescription}
-                      </p>
+                      
+                      {/* Tech Stack */}
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                          <span 
+                            key={techIndex}
+                            className="px-3 py-1 bg-gray-800/80 backdrop-blur-sm text-blue-400 rounded-full text-xs border border-gray-600"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -97,18 +108,6 @@ const ProjectsSection = () => {
                     <p className="text-gray-300 mb-6 leading-relaxed text-sm">
                       {project.fullDescription}
                     </p>
-                    
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span 
-                          key={techIndex}
-                          className="px-3 py-1 bg-gray-800 text-blue-400 rounded-full text-xs border border-gray-700"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
                   </div>
 
                   {/* Action Buttons */}

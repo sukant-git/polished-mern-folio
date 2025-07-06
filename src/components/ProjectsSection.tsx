@@ -1,10 +1,7 @@
 
 import { ExternalLink, Github } from 'lucide-react';
-import { useState } from 'react';
 
 const ProjectsSection = () => {
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-
   const projects = [
     {
       title: "E-Commerce Platform",
@@ -65,85 +62,76 @@ const ProjectsSection = () => {
           {projects.map((project, index) => (
             <div 
               key={index}
-              className={`group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-500 hover:scale-[1.02] ${
-                project.featured ? 'lg:col-span-1' : ''
-              }`}
-              onMouseEnter={() => setHoveredProject(index)}
-              onMouseLeave={() => setHoveredProject(null)}
+              className="group relative h-80 perspective-1000"
             >
-              {/* Project Image */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {/* Flip Card Container */}
+              <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
                 
-                {/* Project Links Overlay */}
-                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a 
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-gray-800/80 backdrop-blur-sm rounded-lg text-white hover:bg-gray-700 transition-colors"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-blue-600/80 backdrop-blur-sm rounded-lg text-white hover:bg-blue-700 transition-colors"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
+                {/* Front Side - Image and Title */}
+                <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden border border-gray-800">
+                  <div className="relative h-full">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-300 text-sm">
+                        {project.shortDescription}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              {/* Project Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
-                  {project.title}
-                </h3>
-                
-                {/* Dynamic Description */}
-                <p className="text-gray-400 mb-4 leading-relaxed transition-all duration-300">
-                  {hoveredProject === index ? project.fullDescription : project.shortDescription}
-                </p>
-                
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex}
-                      className="px-3 py-1 bg-gray-800 text-blue-400 rounded-full text-sm border border-gray-700"
+                {/* Back Side - Project Details */}
+                <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-2xl overflow-hidden bg-gray-900/95 backdrop-blur-sm border border-gray-700 p-6 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-4">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-gray-300 mb-6 leading-relaxed text-sm">
+                      {project.fullDescription}
+                    </p>
+                    
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span 
+                          key={techIndex}
+                          className="px-3 py-1 bg-gray-800 text-blue-400 rounded-full text-xs border border-gray-700"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex space-x-4">
+                    <a 
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center space-x-2 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex space-x-4">
-                  <a 
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>Code</span>
-                  </a>
-                  <a 
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Live Demo</span>
-                  </a>
+                      <Github className="w-4 h-4" />
+                      <span>Code</span>
+                    </a>
+                    <a 
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center space-x-2 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Live Demo</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

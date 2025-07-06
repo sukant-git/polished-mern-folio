@@ -89,7 +89,7 @@ const SkillsSection = () => {
         </div>
 
         {/* Skills Categories */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <div 
               key={index}
@@ -117,22 +117,6 @@ const SkillsSection = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Tech Stack Icons */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold text-white mb-8">Core Technologies</h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {['React', 'Node.js', 'MongoDB', 'Express', 'JavaScript', 'TypeScript', 'Tailwind'].map((tech, index) => (
-              <div 
-                key={index}
-                className="px-4 py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-lg text-blue-300 font-medium hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-300 cursor-default animate-pulse"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                {tech}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
